@@ -167,6 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Gridphp\Gridphp\PhpgridServiceProvider::class,
 
         /*
          * Application Service Providers...

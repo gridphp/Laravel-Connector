@@ -1,0 +1,31 @@
+{
+    "name": "ijpatricio/phpgrid",
+    "description": "Laravel & Phpgrid, together",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joao Patricio",
+            "email": "ijpatricio@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

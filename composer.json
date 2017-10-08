@@ -24,7 +24,8 @@
             "database/factories"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Gridphp\\Gridphp\\": "app/Packages/gridphp/gridphp/src/"
         }
     },
     "autoload-dev": {
