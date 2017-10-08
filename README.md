@@ -21,6 +21,10 @@ php artisan db:seed
 ~~~
 adds 30 superheroes
 
+## Smoke tests
+listing, changing rowAmmount, paginating, fitlering, ordering
+
+
 ## Considerations (Project tasks are too short to collaborate)
 
 - Ordering by first column
@@ -29,4 +33,6 @@ adds 30 superheroes
     
     If we refactor core, when we get to define columns, from a collection, may we send the first element name?
 
-- fsdf
+- //TODO datetime fields with bug (datetime)
+
+    searching for a datetime, with op=eq to solve

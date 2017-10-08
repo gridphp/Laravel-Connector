@@ -40,6 +40,9 @@ class RestService
 
             $terms->each(function($item, $key) use (&$query_builder){
                 if ($item->op == "cn") $query_builder->where($item->field,"LIKE", "%{$item->data}%");
+
+                //TODO datetime fields with bug (datetime)
+                if ($item->op == "eq") $query_builder->where($item->field,"=", $item->data);
             });
         }
 
