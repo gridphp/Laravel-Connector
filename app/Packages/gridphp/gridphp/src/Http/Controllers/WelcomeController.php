@@ -4,6 +4,7 @@ namespace Gridphp\Gridphp\Http\Controllers;
 
 use DB;
 use Phpgrid;
+use App\Superhero;
 use Gridphp\Gridphp\RestService;
 use App\Http\Controllers\Controller;
 
@@ -64,7 +65,8 @@ class WelcomeController extends Controller
 
     public function index()
     {
-        $restRepository = app()->make(RestService::class);
+        $restRepository = app()->make(RestService::class,[ "model_fqn" => Superhero::class]);
+
 
         $db_conf = array();
         $db_conf["type"] = "mysqli"; // not mssql
@@ -83,17 +85,6 @@ class WelcomeController extends Controller
         if (config("phpgrid.full_version")) $g3->set_events($e); //only in full version
 
         $out = $g3->render("gUsers");
-
-
-        /*
-         * Another grid, coul be another connection
-         */
-        $g2 = Phpgrid::start('mysql');
-        $grid["caption"] = "Superheros";
-        $g2->set_options($grid);
-        $g2->table = "superheroes";
-        $out2 = $g2->render("gSuperheros");
-
 
 
         return view("phpgrid::welcome")

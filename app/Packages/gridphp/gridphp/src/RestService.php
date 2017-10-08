@@ -3,10 +3,17 @@
 namespace Gridphp\Gridphp;
 
 use DB;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class RestService
 {
+    protected $modelmodel_fqn;
+
+    public function __construct($model_fqn)
+    {
+        $this->modelmodel_fqn = $model_fqn;
+    }
 
     protected function gridListResponseBuilder(LengthAwarePaginator $paginator){
 
@@ -53,5 +60,52 @@ class RestService
 
     }
 
+
+    public function store()
+    {
+        if(!request()->isMethod("POST") || request("oper") != "add")
+            app()->abort(406,"Incongruous method");
+
+        $new_model = app()->make($this->modelmodel_fqn);
+
+        $new_model->fill(request()->all());
+
+        $new_model->save();
+
+        response()->make($new_model)->send();
+    }
+
+    public function update()
+    {
+        if(!request()->isMethod("POST") || request("oper") != "edit")
+            app()->abort(406,"Incongruous method");
+
+        $model = app()->make($this->modelmodel_fqn);
+
+        $updating_model = $model->where($model->getKeyName(),request($model->getKeyName()))->firstOrFail();
+
+        $updating_model->fill(request()->all());
+
+        $updating_model->save();
+
+        response()->make($updating_model)->send();
+    }
+
+
+    public function destroy()
+    {
+        if(!request()->isMethod("POST") || request("oper") != "del")
+            app()->abort(406,"Incongruous method");
+
+        $model = app()->make($this->modelmodel_fqn);
+
+        $updating_model = $model->where($model->getKeyName(),request($model->getKeyName()))->firstOrFail();
+
+        $updating_model->fill(request()->all());
+
+        $updating_model->delete();
+
+        response()->make($updating_model)->send();
+    }
 
 }
