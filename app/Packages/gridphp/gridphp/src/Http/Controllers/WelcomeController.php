@@ -73,25 +73,25 @@ class WelcomeController extends Controller
         $db_conf["password"] = "root"; // password
         $db_conf["database"] = "grid-laravel-connector"; // database
         $g3 = new \jqgrid($db_conf);
-        $g3->table = "superheros";
+        $g3->table = "superheroes";
 
-        $e["on_select"] = array("index", $restRepository, false);
-        $e["on_insert"] = array("store", null, false);
-        $e["on_update"] = array("update", null, false);
-        $e["on_delete"] = array("", null, false);
-        $e["on_export"] = array("on_export", null, true);
-        if (config("phpgrid.full_version")) $g3->set_events($e);
+        $e["on_select"] = array("index",        $restRepository, false);
+        $e["on_insert"] = array("store",        $restRepository, false);
+        $e["on_update"] = array("update",       $restRepository, false);
+        $e["on_delete"] = array("destroy",      $restRepository, false);
+        $e["on_export"] = array("on_export",    null, true); //TODO define, preferably with PHPoffice, i've seen it already, great! =)
+        if (config("phpgrid.full_version")) $g3->set_events($e); //only in full version
 
         $out = $g3->render("gUsers");
 
 
         /*
-         * this is another connection
+         * Another grid, coul be another connection
          */
         $g2 = Phpgrid::start('mysql');
         $grid["caption"] = "Superheros";
         $g2->set_options($grid);
-        $g2->table = "superheros";
+        $g2->table = "superheroes";
         $out2 = $g2->render("gSuperheros");
 
 

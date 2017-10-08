@@ -22,11 +22,11 @@
 <body>
 
     <div style="margin:10px">
-        {!! $out !!}
+        {!! $out or '$out not defined'!!}
     </div>
 
     <div style="margin:10px">
-        {!! $out2 !!}
+        {!! $out2 or '$out2 not defined'!!}
     </div>
 
     @include("phpgrid::tools.token-fetcher")
