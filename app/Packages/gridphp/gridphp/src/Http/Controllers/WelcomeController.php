@@ -70,12 +70,16 @@ class WelcomeController extends Controller
 
         $db_conf = array();
         $db_conf["type"] = "mysqli"; // not mssql
-        $db_conf["server"] = "192.168.10.1";
+        $db_conf["server"] = "127.0.0.1";
+//        $db_conf["server"] = "192.168.10.1";
         $db_conf["user"] = "root"; // username
         $db_conf["password"] = "root"; // password
         $db_conf["database"] = "grid-laravel-connector"; // database
         $g3 = new \jqgrid($db_conf);
         $g3->table = "superheroes";
+
+        $grid["caption"] = "Superheros";
+        $g3->set_options($grid);
 
         $e["on_select"] = array("index",        $restRepository, false);
         $e["on_insert"] = array("store",        $restRepository, false);
@@ -86,6 +90,7 @@ class WelcomeController extends Controller
 
         $out = $g3->render("gUsers");
 
+        $out2 = "<br><br><br> Also subgrid is possible =)";
 
         return view("phpgrid::welcome")
             ->withOut($out)
