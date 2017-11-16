@@ -98,11 +98,14 @@ class PhpgridServiceProvider extends ServiceProvider
          * Publishing directives
          */
         $this->publishes([
-            $this->configFile => config_path('phpgrid.php'),
-        ], 'ijpatricio/phpgrid');
+            __DIR__ . "/config/" => config_path(),
+        ], 'config');
 
+        $this->publishes([
+            __DIR__ . "/Plugins/bootstrap"  => public_path('/vendor/phpgrid/bootstrap'),
+            __DIR__ . "/Plugins/lib/js"     => public_path('/vendor/phpgrid/js'),
+        ], 'assets');
 
-        //TODO copy frontend assets to public directory
 
     }
 }
